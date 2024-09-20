@@ -9,7 +9,8 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header title = 'hello world'/>
+      
     </>
   )
 }
