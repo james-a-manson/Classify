@@ -7,12 +7,12 @@ function Leaderboard() {
     <div>
       <Header title="Leaderboard" />
       <table className="leaderboard-table">
-        <tr>
+        <thead>
           <th>Position</th>
           <th>Name</th>
           <th>Score</th>
           <th>Current Streak</th>
-        </tr>
+        </thead>
         <tr>
           <td>1</td>
           <td>James</td>
