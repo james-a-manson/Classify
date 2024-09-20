@@ -4,6 +4,7 @@ import { auth } from "../firebase";
 import SignIn from "./auth/SignIn";
 import SignUp from "./auth/SignUp";
 
+
 const AuthDetails = () => {
   const [authUser, setAuthUser] = useState(null);
   const [isRegister, setIsRegister] = useState(false); // Moved to AuthDetails
@@ -38,6 +39,7 @@ const AuthDetails = () => {
 
   return (
     <>
+      
       {authUser ? (
         <>
           <p>Signed In as {authUser.email}</p>
@@ -50,7 +52,6 @@ const AuthDetails = () => {
           ) : (
             <SignIn toggleAuthMode={toggleAuthMode} />
           )}
-          <p>Signed Out</p>
         </>
       )}
     </>

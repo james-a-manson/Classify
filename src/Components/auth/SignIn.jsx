@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { auth } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import background from "../../assets/background.png";
 
 const SignIn = ({ toggleAuthMode }) => {
   const [email, setEmail] = useState("");
@@ -19,7 +20,14 @@ const SignIn = ({ toggleAuthMode }) => {
 
   return (
     <>
-      <div className="LoginOuter2">
+      <div className="LoginOuter2" style={{
+    backgroundImage: `url(${background})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: '100vh', // or a specific height
+    width: '100%', // ensure it spans the width
+    margin:0
+  }}>
         <div className="LoginOuter">
           <form onSubmit={signIn}>
             <div className="LoginElements">
@@ -48,6 +56,7 @@ const SignIn = ({ toggleAuthMode }) => {
           </form>
         </div>
       </div>
+
     </>
   );
 };
