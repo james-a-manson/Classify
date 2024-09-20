@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
+import {Link} from "react-router-dom";
+
 import './App.css'
 
 export default function Login() {
-  const [username, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (event) => {
@@ -22,6 +24,7 @@ export default function Login() {
         <input 
           type="text" 
           value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
       </label>
       
