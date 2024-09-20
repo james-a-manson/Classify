@@ -14,8 +14,9 @@ function App() {
 
   return (
     <>
-      <Streaks streak={49}/>
+      <Streaks streak={49} />
       <AuthDetails />
+      <Leaderboard />
     </>
   );
 }

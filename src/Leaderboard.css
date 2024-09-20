@@ -17,6 +17,6 @@ thead {
 table {
   border-collapse: collapse;
   text-align: center;
-  float: right;
   margin: 10px;
+  width: 400px;
 }
