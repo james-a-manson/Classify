@@ -1,0 +1,18 @@
+td,
+th {
+  border: 2px solid;
+  padding: 3px;
+}
+.leaderboard-table {
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* highlights every second row */
+tr:nth-child(even) {
+  background-color: rgb(157, 149, 146);
+}
+
+tr:hover {
+  background-color: coral;
+}
