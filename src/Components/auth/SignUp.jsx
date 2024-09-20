@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { auth } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
-const SignUp = () => {
+const SignUp = ({ toggleAuthMode }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,7 +18,11 @@ const SignUp = () => {
 
   return (
     <>
+    <div className = "LoginOuter2">
+    <div className = "LoginOuter">
       <form onSubmit={signUp}>
+     <div className = "LoginElements">
+
         <h1>Create Account</h1>
         <input
           type="email"
@@ -33,7 +37,17 @@ const SignUp = () => {
           onChange={(e) => setPassword(e.target.value)}
         ></input>
         <button type="submit">Sign Up</button>
+        <span>Have an account already? <span
+                style={{ color: 'blue', cursor: 'pointer', textDecoration: 'underline' }}
+                onClick={toggleAuthMode}
+              >
+                Log In
+              </span></span>
+        </div>
+
       </form>
+      </div>
+          </div>
     </>
   );
 };

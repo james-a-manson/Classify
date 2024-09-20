@@ -6,6 +6,7 @@ import SignUp from "./auth/SignUp";
 
 const AuthDetails = () => {
   const [authUser, setAuthUser] = useState(null);
+  const [isRegister, setIsRegister] = useState(false); // Moved to AuthDetails
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
@@ -16,17 +17,25 @@ const AuthDetails = () => {
       }
     });
     return () => {
-        listen();
-    }
+      listen();
+    };
   }, []);
 
   const userSignOut = () => {
-    signOut(auth).then(() => {
+    signOut(auth)
+      .then(() => {
         console.log("User signed out");
-    }).catch((error) => {
+      })
+      .catch((error) => {
         console.log(error);
-    });
-  }
+      });
+  };
+
+  // Function to toggle between SignIn and SignUp
+  const toggleAuthMode = () => {
+    setIsRegister((prev) => !prev);
+  };
+
   return (
     <>
       {authUser ? (
@@ -36,9 +45,12 @@ const AuthDetails = () => {
         </>
       ) : (
         <>
-        <SignIn />
-        <SignUp />
-        <p>Signed Out</p>
+          {isRegister ? (
+            <SignUp toggleAuthMode={toggleAuthMode} />
+          ) : (
+            <SignIn toggleAuthMode={toggleAuthMode} />
+          )}
+          <p>Signed Out</p>
         </>
       )}
     </>
