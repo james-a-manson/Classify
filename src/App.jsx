@@ -12,8 +12,7 @@ function App() {
 
   return (
     <>
-      <Header />
-      <Leaderboard />
+      <Login />
     </>
   );
 }

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import {Link} from "react-router-dom";
 
-import './App.css'
+import './Login.css'
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -14,8 +14,8 @@ export default function Login() {
   }
 
   return (
-    
-    
+    <>
+    <div className = "LoginOuter2">
     <div className = "LoginOuter">
     <h1>
       Login
@@ -41,6 +41,7 @@ export default function Login() {
       </div>
     </form>
     </div>
-
+    </div>
+    </>
   )
 }
