@@ -7,6 +7,7 @@ import Login from "./LoginForm";
 import Streaks from "./Streaks";
 
 import "./App.css";
+import AuthDetails from "./components/AuthDetails";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -14,6 +15,7 @@ function App() {
   return (
     <>
       <Streaks streak={49}/>
+      <AuthDetails />
     </>
   );
 }
