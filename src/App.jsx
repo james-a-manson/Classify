@@ -5,18 +5,17 @@ import Header from "./components/Header";
 import Leaderboard from "./Leaderboard";
 import Login from "./LoginForm";
 import Streaks from "./Streaks";
-
 import "./App.css";
 import AuthDetails from "./components/AuthDetails";
+import Attendance from "./Attendance";
+
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <Streaks streak={49} />
-      <AuthDetails />
-      <Leaderboard />
+      <Attendance/>
     </>
   );
 }
