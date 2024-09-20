@@ -34,13 +34,13 @@ const SignIn = ({ toggleAuthMode }) => {
               <h1>Log In</h1>
               <input
                 type="email"
-                placeholder="Enter your email"
+                placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <input
                 type="password"
-                placeholder="Enter your password"
+                placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
