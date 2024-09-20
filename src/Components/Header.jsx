@@ -1,5 +1,6 @@
 import React from "react";
 
+//this will hold the title for each page
 function Header(props) {
     return (
         <header>
