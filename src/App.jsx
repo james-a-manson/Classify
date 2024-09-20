@@ -4,6 +4,7 @@ import viteLogo from "/vite.svg"; //also delete the logo files themselves
 import Header from "./components/Header";
 import Leaderboard from "./Leaderboard";
 import Login from "./LoginForm";
+import Streaks from "./Streaks";
 
 import "./App.css";
 
@@ -12,7 +13,7 @@ function App() {
 
   return (
     <>
-      <Login />
+      <Streaks streak={49}/>
     </>
   );
 }
