@@ -4,9 +4,9 @@ import "./Leaderboard.css";
 
 function Leaderboard() {
   return (
-    <div>
+    <div className="leaderboard-div">
       <Header title="Leaderboard" />
-      <table className="leaderboard-table">
+      <table>
         <thead>
           <th>Position</th>
           <th>Name</th>
