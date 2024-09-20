@@ -13,8 +13,7 @@ function App() {
 
   return (
     <>
-      <Header title = 'hello world'/>
-      <Leaderboard />
+      <Login />
     </>
   )
 }

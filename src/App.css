@@ -1,1 +1,10 @@
-  
+  .LoginElements{
+        display:flex;
+        flex-direction: column;
+        
+        /* padding: 10px;
+        text-align: left; */
+        /* background-color: #cccccc;
+        color: #000000; */
+
+  }

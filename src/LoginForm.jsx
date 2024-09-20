@@ -1,26 +1,40 @@
 import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
+import './App.css'
 
-function Login() {
-  const [name, setName] = useState("");
+export default function Login() {
+  const [username, setName] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert(`The name you entered was: ${name}`)
+    alert(`username ${username}\nPassword ${password}`)
   }
 
   return (
+    <>
+    <h1>
+      Login
+    </h1>
     <form onSubmit={handleSubmit}>
-      <label>Enter your name:
+      <div className = "LoginElements">
+      <label>Username:
         <input 
           type="text" 
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={username}
+        />
+      </label>
+      
+      <label>Password:
+        <input 
+          type="text" 
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </label>
       <input type="submit" />
+      </div>
     </form>
+    </>
   )
 }
-
-export default Login;
