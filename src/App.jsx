@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg' //delete these two later, not needed 
 import viteLogo from '/vite.svg'           //also delete the logo files themselves
 import Header from './components/Header'
 import Leaderboard from './Leaderboard'
+import Login from './LoginForm'
 
 import './App.css'
 
