@@ -7,7 +7,7 @@ import SignUp from "./auth/SignUp";
 
 const AuthDetails = () => {
   const [authUser, setAuthUser] = useState(null);
-  const [isRegister, setIsRegister] = useState(false); // Moved to AuthDetails
+  const [isRegister, setIsRegister] = useState(false); 
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
@@ -32,7 +32,6 @@ const AuthDetails = () => {
       });
   };
 
-  // Function to toggle between SignIn and SignUp
   const toggleAuthMode = () => {
     setIsRegister((prev) => !prev);
   };

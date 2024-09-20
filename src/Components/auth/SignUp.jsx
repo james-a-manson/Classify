@@ -23,8 +23,8 @@ const SignUp = ({ toggleAuthMode }) => {
     backgroundImage: `url(${background})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    height: '100vh', // or a specific height
-    width: '100%', // ensure it spans the width
+    height: '100vh', 
+    width: '100%', 
   }}>
     <div className = "LoginOuter">
       <form onSubmit={signUp}>
