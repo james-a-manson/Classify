@@ -14,7 +14,9 @@ export default function Login() {
   }
 
   return (
-    <>
+    
+    
+    <div className = "LoginOuter">
     <h1>
       Login
     </h1>
@@ -38,6 +40,7 @@ export default function Login() {
       <input type="submit" />
       </div>
     </form>
-    </>
+    </div>
+
   )
 }
