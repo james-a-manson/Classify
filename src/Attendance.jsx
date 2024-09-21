@@ -7,16 +7,19 @@ import {getAuth} from "firebase/auth";
 
 
 export default function Attendance() {
-  const [attended, setAttended] = useState("");
-  const [missed, setMissed] = useState("");
+  const [attended, setAttended] = useState(0);
+  const [missed, setMissed] = useState(0);
   const [score, setScore] = useState(null);
   const [streak, setStreak] = useState(null);
   const [userDocumentID, setUserDocumentID] = useState(null);
   
-  const incrementAttended = () => setAttended(prev => prev + 1);
-  const decrementAttended = () => setAttended(prev => (prev > 0 ? prev - 1 : 0));
-  const incrementMissed = () => setMissed(prev => prev + 1);
-  const decrementMissed = () => setMissed(prev => (prev > 0 ? prev - 1 : 0));
+  const incrementAttended = () => {
+    // const attendedNum = parseInt(prev) || 0; //praseInt is needed here, even though the submit type="number", it's still saved as a string
+    setAttended(prev => parseInt(prev) + 1)
+  };
+  const decrementAttended = () => setAttended(prev => (prev > 0 ?  parseInt(prev) - 1 : 0));
+  const incrementMissed = () => setMissed(prev =>  parseInt(prev) + 1);
+  const decrementMissed = () => setMissed(prev => (prev > 0 ?  parseInt(prev) - 1 : 0));
   const auth = getAuth(); //getAuth() is an inbuilt firebase function.
   //It returns the authentication 'instance' that firebase uses.
   //We store this instance into the variable, 'auth'. 
