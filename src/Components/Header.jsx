@@ -1,10 +1,13 @@
 import React from "react";
 
 //this will hold the title for each page
-function Header(props) {
+function Header() {
     return (
         <header>
-        <h1>{props.title}</h1>
+            <h1>Jam Donuts</h1>
+            <button className="sign-out">
+                Sign Out
+            </button>
         </header>
     );
 }
