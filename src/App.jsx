@@ -10,6 +10,7 @@ import Streaks from "./Streaks";
 import "./App.css";
 import AuthDetails from "./components/AuthDetails";
 import Attendance from "./Attendance";
+import {  signOut } from "firebase/auth";
 
 
 function App() {
@@ -28,12 +29,22 @@ function App() {
     };
   });
 
+  const userSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("User signed out");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       {authUser ? (
         <>
-        <h1>Working</h1>
-        <Streaks />
+        <p>Signed In as {authUser.email}</p>
+        <button onClick={userSignOut}>Sign Out</button>
         </>
       ) : (
         <AuthDetails />
