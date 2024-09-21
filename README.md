@@ -45,7 +45,7 @@ To get a local copy of the project, follow the following steps:
    ```
 4. Start the development server
    ```bash
-   npm start
+   npm run dev
    ```
 5. Open your browser and navigate to the URL provided by your terminal.
 
