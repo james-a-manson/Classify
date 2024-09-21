@@ -59,7 +59,7 @@ const SignIn = ({ toggleAuthMode }) => {
               />
               <button type="submit">Log In</button>
               <span>Don't have an Account? <span
-                style={{ color: 'blue', cursor: 'pointer', textDecoration: 'underline' }}
+                style={{ color: 'white', cursor: 'pointer', fontWeight: 'bold'}}
                 onClick={toggleAuthMode}
               >
                 Register
