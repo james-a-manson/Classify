@@ -13,13 +13,11 @@ export default function Attendance() {
   const [streak, setStreak] = useState(null);
   const [userDocumentID, setUserDocumentID] = useState(null);
   
-  const incrementAttended = () => {
-    // const attendedNum = parseInt(prev) || 0; //praseInt is needed here, even though the submit type="number", it's still saved as a string
-    setAttended(prev => parseInt(prev) + 1)
-  };
+  const incrementAttended = () => {setAttended(prev => parseInt(prev) + 1)};
   const decrementAttended = () => setAttended(prev => (prev > 0 ?  parseInt(prev) - 1 : 0));
   const incrementMissed = () => setMissed(prev =>  parseInt(prev) + 1);
   const decrementMissed = () => setMissed(prev => (prev > 0 ?  parseInt(prev) - 1 : 0));
+
   const auth = getAuth(); //getAuth() is an inbuilt firebase function.
   //It returns the authentication 'instance' that firebase uses.
   //We store this instance into the variable, 'auth'. 
@@ -58,6 +56,7 @@ export default function Attendance() {
         //If the snapshot wasn't empty, it stores the first matching document into userScoreDoc.
 
         setStreak(userScoreDoc.data().streak); 
+        setScore(userScoreDoc.data().score);
 
         setUserDocumentID(userScoreDoc.id); 
         //Our userDocumentID state is meant to hold the DOCUMENT's unique firebase ID thing.
@@ -87,24 +86,23 @@ export default function Attendance() {
       return;                               //It exits so that nothing is saved or changed.
     } 
 
+    let newStreak;
     if (missedNum > 0) {
-      setStreak(0);
+      newStreak = 0;
     } else {
-      setStreak(prevStreak => (prevStreak || 0) + attendedNum);
+      newStreak = (streak || 0) + attendedNum;
     }
-
+  
     let points;
 
     if ((attendedNum > 0 && missedNum === 0) || (attendedNum === 0 && missedNum > 0)) {
       points = (attendedNum - missedNum) * 2;
     } else {
-      points = attendedNum - missed;
+      points = attendedNum - missedNum;
     }
 
-    setScore(points);      //Store into our useState variable.
-
-
-    const newStreak = missedNum > 0 ? 0 : (streak || 0) + attendedNum;
+    const newTotalScore = (score || 0) + points; 
+    setScore(newTotalScore); 
 
     try {
       if (userDocumentID) { //If a document ID exists in userDocumentID...
@@ -115,7 +113,7 @@ export default function Attendance() {
 
         await updateDoc(docRef, { //Uses updateDoc() function to update the specified document
           streak: newStreak,
-          score: points,
+          score: newTotalScore,
           student_email: userEmail
         });
         //console.log("Score updated successfully!");
@@ -124,7 +122,7 @@ export default function Attendance() {
         //This was defined and used earlier in the effect hook, but its scope was limited to that.
         const newDocRef = await addDoc(studentsCollection, {  //Uses addDoc() function to add a document
           streak: streak,                                   //in our specified collection                                //Also saves this new document into newDocRef.
-          score: points,
+          score: newTotalScore,
           student_email: userEmail
         });
         setUserDocumentID(newDocRef.id); 
