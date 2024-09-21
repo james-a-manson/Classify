@@ -47,6 +47,7 @@ function App() {
         <button onClick={userSignOut}>Sign Out</button>
         <Header />
         <div className = "outerContainer">
+
         <Leaderboard/>
         <Attendance/>
         <Streaks/>

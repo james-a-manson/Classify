@@ -35,7 +35,7 @@ export default function Streaks() {
 
   //rendering section
   return (
-    <div>
+    <div className = "streaks">
       <h1 id="Phrase">Your streak count:</h1>
       <h1 id="Number">{streak !== null ? streak : "Loading..."}</h1>
       <img src={firePNG} alt=":fire emoji:"></img>
