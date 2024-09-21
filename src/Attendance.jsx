@@ -10,12 +10,20 @@ export default function Attendance(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const attendedInt = parseInt(attended) || 0; //praseInt is needed here, even though the submit type="number", it's still saved as a string
+    const attendedNum = parseInt(attended) || 0; //praseInt is needed here, even though the submit type="number", it's still saved as a string
     const missedNum = parseInt(missed) || 0;
-    const points = attendedInt - missedNum;
+    
+    //Bit of validation checking for negative values
+    if (attendedNum < 0 || missedNum < 0) {
+      setScore(-999);
+    } else {
+      const points = attendedNum - missedNum;
+      setScore(points);
+    }
 
-    setScore(points);
     //After this, also use the score state and store that shit in the database somehow, so far I've just done the UI/user-side feedback part.
+    
+  
   };
 
 
@@ -41,12 +49,20 @@ export default function Attendance(props) {
       <input type="submit" />
       </div>
     </form>
-    {score !== null && ( //Using the wack && conditional thing where it's "if score is not null" THEN do brackets
-      <h2>
-        {score > 0 ? `Gained points! ${score}` : score < 0 ? `lost points! ${score}` : `bruh nothing happened`}
-      </h2>
-      //So, backticks ` are needed instead of regular quotes " because it allows 'string interpolation', which is what enables embedding variables into the string directly.
-      //Additionally, to signal that a variable is being presented (so it doesn't literally print {score}), a $ should be used before the variable.
+    {score !== null && ( //Uses wack && operator where if score is not null, then it does the following
+    <h2>
+        {(() => {
+            if (score === -999) {
+                return `You can't have negative inputs.`;
+            } else if (score < 0) {
+                return `Lost points! ${score}`;
+            } else if (score > 0) {
+                return `Gained points! ${score}`;
+            } else {
+                return `Bruh nothing happened`;
+            }
+        })()}
+    </h2>
     )}
 
     </div>
