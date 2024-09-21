@@ -31,7 +31,10 @@ function App() {
   return (
     <>
       {authUser ? (
+        <>
         <h1>Working</h1>
+        <Streaks />
+        </>
       ) : (
         <AuthDetails />
       )}

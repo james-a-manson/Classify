@@ -4,12 +4,21 @@ import "./Streaks.css";
 import firePNG from "./assets/fire.png";
 
 import { db } from "./firebase";
-import { query, getDoc, collection, where } from "firebase/firestore";
+import { query, getDoc, collection, where, onSnapshot, snapshotEqual } from "firebase/firestore";
 import { auth } from "./firebase";
 
 const currentUser = auth.currentUser;
+console.log(currentUser);
 const colRef = collection(db, 'students');
 const q = query(colRef, where('student_email', '==', currentUser));
+
+onSnapshot(q, (snapshot) => {
+  let currentUserData = []
+  snapshot.docs.forEach((doc) => {
+    currentUserData.push({ ...doc.data(), id: doc.id})
+  })
+  console.log(currentUserData)
+})
 
 
 export default function Streaks(props) {
