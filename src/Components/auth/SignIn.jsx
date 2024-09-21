@@ -6,6 +6,7 @@ import background from "../../assets/background.png";
 const SignIn = ({ toggleAuthMode }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const signIn = (e) => {
     e.preventDefault();
@@ -14,6 +15,7 @@ const SignIn = ({ toggleAuthMode }) => {
         console.log(userCredential);
       })
       .catch((error) => {
+        setError(error.message);
         console.log(error);
       });
   };
@@ -32,6 +34,7 @@ const SignIn = ({ toggleAuthMode }) => {
           <form onSubmit={signIn}>
             <div className="LoginElements">
               <h1>Log In</h1>
+              {error && <p style={{ color: 'red' }}>{error}</p>}
               <input
                 type="email"
                 placeholder="Email"

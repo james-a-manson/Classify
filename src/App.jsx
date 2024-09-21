@@ -35,7 +35,6 @@ function App() {
       ) : (
         <AuthDetails />
       )}
-        <AuthDetails/>
     </>
   );
 }
