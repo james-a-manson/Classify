@@ -7,8 +7,8 @@ import {getAuth} from "firebase/auth";
 
 
 export default function Attendance() {
-  const [attended, setAttended] = useState("");
-  const [missed, setMissed] = useState("");
+  const [attended, setAttended] = useState(0);
+  const [missed, setMissed] = useState(0);
   const [score, setScore] = useState(null);
   const [streak, setStreak] = useState(null);
   const [userDocumentID, setUserDocumentID] = useState(null);
