@@ -77,7 +77,7 @@ export default function Attendance() {
 
   const handleSubmit = async (event) => { 
   //Declare an asynchronous function which will be used when button is pressed.
-    // event.preventDefault(); //Prevent default page reload
+    event.preventDefault(); //Prevent default page reload
     const attendedNum = parseInt(attended) || 0; //praseInt is needed here, even though the submit type="number", it's still saved as a string
     const missedNum = parseInt(missed) || 0;
     
@@ -130,6 +130,8 @@ export default function Attendance() {
         //This is essential, otherwise the documentID useState is never updated,
         //and further submissions will keep creating new documents.
       }
+      window.location.reload();
+
     } catch (error) {
       console.error("Error saving/updating score: ", error);
     }
