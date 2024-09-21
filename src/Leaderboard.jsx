@@ -38,7 +38,8 @@ const Leaderboard = () => {
   const sortedStudents = [...students].sort((a, b) => b.score - a.score);
 
   return (
-    <table cellPadding="10">
+    <div className = "leaderboard">
+    <table cellPadding="10" > 
       <thead>
         <tr>
           <th>Name</th>
@@ -56,6 +57,7 @@ const Leaderboard = () => {
         ))}
       </tbody>
     </table>
+    </div>
   );
 };
 

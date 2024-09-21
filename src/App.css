@@ -6,4 +6,11 @@
 .outerContainer{
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+    gap:50px;
+}
+.attendance, .leaderboard, .streaks{
+    padding: 20px;
+  border-style: dashed
+
 }

@@ -40,7 +40,7 @@ export default function Attendance(props) {
 
 
   return (
-    <div>
+    <div className = "attendance">
       <h1>How many classes did you attend or miss today?</h1>
       <form onSubmit={handleSubmit}>
       <div className = "LoginElements">
