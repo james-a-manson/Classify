@@ -8,7 +8,7 @@ import SignUp from "./auth/SignUp";
 const AuthDetails = () => {
   const [authUser, setAuthUser] = useState(null);
   const [isRegister, setIsRegister] = useState(false); 
-
+  
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
