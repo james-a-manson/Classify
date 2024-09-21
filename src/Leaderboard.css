@@ -1,22 +1,58 @@
-/* highlights every second row */
-tr:nth-child(even) {
-  background-color: rgb(157, 149, 146);
+.leaderboard {
+  margin: 20px;
+  font-family: Arial, sans-serif;
 }
 
-tr:hover {
-  background-color: coral;
-}
-
-thead,
-td {
-  border: 1px solid;
-}
-thead {
-  color: rgb(43, 113, 226);
-}
-table {
+.leaderboard table {
+  width: 100%;
   border-collapse: collapse;
-  text-align: center;
-  margin: 10px;
-  width: 400px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard th, td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.leaderboard th {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.leaderboard tbody tr.default {
+  background-color: #fff; /* or another solid color */
+  opacity: 1; /* Ensure it's fully opaque */
+}
+
+.leaderboard tbody tr.default:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.leaderboard tbody tr.default:hover {
+  background-color: #f1f1f1;
+}
+
+.leaderboard table tr.gold {
+  background-color: gold;
+}
+
+.leaderboard table tr.gold:hover {
+  background-color: rgb(231, 196, 1);
+}
+
+.leaderboard table tr.silver {
+  background-color: silver;
+}
+
+.leaderboard table tr.silver:hover {
+  background-color: rgb(173, 173, 173);
+}
+
+.leaderboard table tr.bronze {
+  background-color: #cd7f32; /* bronze color */
+}
+
+.leaderboard table tr.bronze:hover {
+  background-color: #c1782f; /* bronze color */
 }

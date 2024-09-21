@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Header from "./components/Header";
 
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
@@ -38,25 +37,36 @@ const Leaderboard = () => {
   const sortedStudents = [...students].sort((a, b) => b.score - a.score);
 
   return (
-    <div className = "leaderboard">
-    <table cellPadding="10" > 
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Score</th>
-          <th>Streak</th>
-        </tr>
-      </thead>
-      <tbody>
-        {sortedStudents.map((student) => (
-          <tr key={student.id}>
-            <td>{student["student_email"]}</td>
-            <td>{student.score}</td>
-            <td>{student.streak}</td>
+    <div className="leaderboard">
+      <table cellPadding="10">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Score</th>
+            <th>Streak</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {sortedStudents.map((student, index) => {
+            let className = "default";
+            if (index === 0) className = "gold";
+            else if (index === 1) className = "silver";
+            else if (index === 2) className = "bronze";
+
+            console.log(
+              `Student: ${student["student_email"]}, Class: ${className}`
+            ); // Debugging line
+
+            return (
+              <tr key={student.id} className={className}>
+                <td>{student["student_email"]}</td>
+                <td>{student.score}</td>
+                <td>{student.streak}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };

@@ -6,11 +6,12 @@ import { collection, addDoc, updateDoc, doc, getDocs, query, where } from "fireb
 import {getAuth} from "firebase/auth";
 
 
-export default function Attendance(props) {
+export default function Attendance() {
   const [attended, setAttended] = useState("");
   const [missed, setMissed] = useState("");
   const [score, setScore] = useState(null);
-  const [userScoreID, setUserScoreID] = useState(null);
+  const [streak, setStreak] = useState(null);
+  const [userDocumentID, setUserDocumentID] = useState(null);
   
   const incrementAttended = () => setAttended(prev => prev + 1);
   const decrementAttended = () => setAttended(prev => (prev > 0 ? prev - 1 : 0));
@@ -28,21 +29,21 @@ export default function Attendance(props) {
   //As such, userEmail = auth.currentUser.email which grabs the email property from the currentUser object.
   //Else, userEmail is set to null.
 
-  useEffect(() => { //Declares a side effect that runs when the component is rendered.
-    const fetchUserScore = async () => { //async lets you use await in the function
-    //Using => function syntax. Empty () means no parameters. fetchUserScore is a function.
+  useEffect (() => { //Declares a side effect that runs when the component is rendered.
+    const fetchUserDocument = async () => { //async lets you use await in the function
+    //Using => function syntax. Empty () means no parameters. fetchUserDocument is a function.
 
       if (!userEmail) {
-        setUserScoreID(null);
+        setUserDocumentID(null);
         return;
       }
       //If userEmail was set null before, it sets the document ID's state to null too and exits.
 
-      const scoresCollection = collection(db, 'scores');
-      //the collection() function accesses our firestore collection called 'scores'.
-      //Stores this collection into my variable called scoresCollection.
-      const q = query(scoresCollection, where("student_email", "==", userEmail));
-      //Creates a query from the scores collection, storing the query in variable, 'q'.
+      const studentsCollection = collection(db, 'students');
+      //the collection() function accesses our firestore collection called 'students'.
+      //Stores this collection into my variable called studentsCollection.
+      const q = query(studentsCollection, where("student_email", "==", userEmail));
+      //Creates a query from the students collection, storing the query in variable, 'q'.
       //The query is looking for when field, student_email, is equal to userEmail.
       const querySnapshot = await getDocs(q);
       //The getDocs() function sends a query to the database, hence the 'q' argument being given.
@@ -52,22 +53,25 @@ export default function Attendance(props) {
       if (!querySnapshot.empty) {
         const userScoreDoc = querySnapshot.docs[0];
         //If the snapshot wasn't empty, it stores the first matching document into userScoreDoc.
-        setUserScoreID(userScoreDoc.id); 
-        //Our UserScoreID state is meant to hold the DOCUMENT's unique firebase ID thing.
+
+        setStreak(userScoreDoc.data().streak); 
+
+        setUserDocumentID(userScoreDoc.id); 
+        //Our userDocumentID state is meant to hold the DOCUMENT's unique firebase ID thing.
         //.id is a built in property for any document snapshot.
       } else {
-        setUserScoreID(null);
+        setUserDocumentID(null);
         //If the query snapshot was empty, we set the document ID to null.
       }
     };
 
-    fetchUserScore();
-    //All of the above code was the fetchUserScore() definition.
+    fetchUserDocument();
+    //All of the above code was the fetchUserDocument() definition.
     //This actually calls it now.
   }, [userEmail]);
   //This last part defines our useEffect() to run whenever userEmail changes.
   //So, this whole effect is finding the document that matches our user's email,
-  //then storing that document's ID into our userScoreID useState for later use.
+  //then storing that document's ID into our userDocumentID useState for later use.
 
   const handleSubmit = async (event) => { 
   //Declare an asynchronous function which will be used when button is pressed.
@@ -80,33 +84,47 @@ export default function Attendance(props) {
       return;                               //It exits so that nothing is saved or changed.
     } 
 
-    const points = attendedNum - missedNum; //If here, inputs are good. Do point calculation logic.
-    setScore(points);                       //Store into our useState variable.
+    if (missedNum > 0) {
+      setStreak(0);
+    } else {
+      setStreak(prevStreak => (prevStreak || 0) + attendedNum);
+    }
 
+    let points;
+
+    if ((attendedNum > 0 && missedNum === 0) || (attendedNum === 0 && missedNum > 0)) {
+      points = (attendedNum - missedNum) * 2;
+    } else {
+      points = attendedNum - missed;
+    }
+
+    setScore(points);      //Store into our useState variable.
+
+
+    const newStreak = missedNum > 0 ? 0 : (streak || 0) + attendedNum;
 
     try {
-      if (userScoreID) { //If a document ID exists in userScoreID...
-        const docRef = doc(db, 'scores', userScoreID);
+      if (userDocumentID) { //If a document ID exists in userDocumentID...
+        const docRef = doc(db, 'students', userDocumentID);
         //doc() returns the document instance matching our parameters.
         //We've given it the db instance, the collection name, and the exact document ID we want.
         //We store this document into docRef.
+
         await updateDoc(docRef, { //Uses updateDoc() function to update the specified document
-          attended: attendedNum,
-          missed: missedNum,
+          streak: newStreak,
           score: points,
           student_email: userEmail
         });
         //console.log("Score updated successfully!");
-      } else { //If userScoreID is nulL, meaning no existing document was found...
-        const scoresCollection = collection(db, 'scores');
+      } else { //If userDocumentID is nulL, meaning no existing document was found...
+        const studentsCollection = collection(db, 'students');
         //This was defined and used earlier in the effect hook, but its scope was limited to that.
-        const newDocRef = await addDoc(scoresCollection, {  //Uses addDoc() function to add a document
-          attended: attendedNum,                            //in our specified collection
-          missed: missedNum,                                //Also saves this new document into newDocRef.
+        const newDocRef = await addDoc(studentsCollection, {  //Uses addDoc() function to add a document
+          streak: streak,                                   //in our specified collection                                //Also saves this new document into newDocRef.
           score: points,
           student_email: userEmail
         });
-        setUserScoreID(newDocRef.id); 
+        setUserDocumentID(newDocRef.id); 
         //After creating a new document for a new user, set the document ID useState to this new document.
         //This is essential, otherwise the documentID useState is never updated,
         //and further submissions will keep creating new documents.
