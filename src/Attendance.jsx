@@ -114,7 +114,7 @@ export default function Attendance(props) {
 
   //This section handles the actual rendering for the Attendance component.
   return (
-    <div>
+    <div className = "attendance">
       <h1>How many classes did you attend or miss today?</h1>
       <form onSubmit={handleSubmit}>
       <div className = "LoginElements">

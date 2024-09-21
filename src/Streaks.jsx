@@ -46,7 +46,7 @@ useEffect(() => {
 }, [currentUser]);
 
   return (
-    <div>
+    <div className = "streaks">
       <h1 id="Phrase">Your streak count:</h1>
       <h1 id="Number">{props.streak}</h1>
       <img src={firePNG} alt=":fire emoji:"></img>
