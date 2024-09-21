@@ -4,56 +4,42 @@ import "./Streaks.css";
 import firePNG from "./assets/fire.png";
 
 import { db } from "./firebase";
-import { query, getDoc, collection, where, onSnapshot, snapshotEqual } from "firebase/firestore";
-import { auth } from "./firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { collection, addDoc, updateDoc, doc, getDocs, query, where } from "firebase/firestore";
+import {getAuth} from "firebase/auth";
 
-export default function Streaks(props) {
-  const [currentUserData, setCurrentUserData] = useState([]);
-  const [currentUser, setCurrentUser] = useState(null);
+export default function Streaks() {
+
+  const [streak, setStreak] = useState(null);
+
+  const auth = getAuth();
+  const userEmail = auth.currentUser ? auth.currentUser.email : null;
 
   useEffect(() => {
-    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setCurrentUser(user);
-      } else {
-        setCurrentUser(null);
+    const fetchUserDocument = async () => { 
+      if (!userEmail) {
+        return;
       }
-    });
 
-    return () => {
-      unsubscribeAuth();
+      const studentsCollection = collection(db, 'students');
+      const q = query(studentsCollection, where("student_email", "==", userEmail));
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        const userScoreDoc = querySnapshot.docs[0];
+        setStreak(userScoreDoc.data().streak);
+      }
     };
 
-  }, []);
+    fetchUserDocument();
+  }, [userEmail]);
 
-
-useEffect(() => {
-  if (currentUser) {
-    const colRef = collection(db, 'students');
-    const q = query(colRef, where('student_email', '==', currentUser.email)); 
-
-    const unsubscribeSnapshot = onSnapshot(q, (snapshot) => {
-      const currentUserData = [];
-      snapshot.docs.forEach((doc) => {
-        currentUserData.push({ ...doc.data(), id: doc.id });
-      });
-      setCurrentUserData(currentUserData); 
-    });
-
-    return () => unsubscribeSnapshot();
-  }
-}, [currentUser]);
-
+  //rendering section
   return (
     <div>
       <h1 id="Phrase">Your streak count:</h1>
-      <h1 id="Number">{props.streak}</h1>
+      <h1 id="Number">{streak !== null ? streak : "Loading..."}</h1>
       <img src={firePNG} alt=":fire emoji:"></img>
     </div>
   );
 }
 
-Streaks.defaultProps = {
-  streak: "Streak value not found"
-}
