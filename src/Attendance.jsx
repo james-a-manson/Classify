@@ -77,7 +77,7 @@ export default function Attendance() {
 
   const handleSubmit = async (event) => { 
   //Declare an asynchronous function which will be used when button is pressed.
-    event.preventDefault(); //Prevent default page reload
+    // event.preventDefault(); //Prevent default page reload
     const attendedNum = parseInt(attended) || 0; //praseInt is needed here, even though the submit type="number", it's still saved as a string
     const missedNum = parseInt(missed) || 0;
     

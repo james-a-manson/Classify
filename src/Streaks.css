@@ -10,3 +10,7 @@ img {
 #Number {
   font-size: 40px;
 }
+.streaks{
+  display:flex;
+  flex-direction: column;
+align-items: center;}
