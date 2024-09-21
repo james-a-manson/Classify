@@ -22,6 +22,9 @@ const SignIn = ({ toggleAuthMode }) => {
             case 'Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).':
                 setError('Too many attempts, try again later');
                 break;
+            case 'Firebase: Error (auth/invalid-email).':
+                setError('Invalid email');
+                break;
             default:
                 setError(error.message);
                 break;
