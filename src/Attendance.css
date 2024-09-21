@@ -1,0 +1,70 @@
+.attendance {
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .attendance h1 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .LoginElements {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  label {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: #444;
+  }
+  
+  input[type="number"] {
+    margin-left: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100px;
+    text-align: center;
+  }
+  
+  input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  .arrow-container {
+    display: inline-block;
+    margin-left: 10px;
+  }
+  
+  .arrow {
+    display: block;
+    font-size: 20px;
+    color: #555;
+    cursor: pointer;
+  }
+  
+  .arrow:hover {
+    color: #000;
+  }
+  

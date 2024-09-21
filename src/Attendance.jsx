@@ -12,6 +12,10 @@ export default function Attendance(props) {
   const [score, setScore] = useState(null);
   const [userScoreID, setUserScoreID] = useState(null);
   
+  const incrementAttended = () => setAttended(prev => prev + 1);
+  const decrementAttended = () => setAttended(prev => (prev > 0 ? prev - 1 : 0));
+  const incrementMissed = () => setMissed(prev => prev + 1);
+  const decrementMissed = () => setMissed(prev => (prev > 0 ? prev - 1 : 0));
   const auth = getAuth(); //getAuth() is an inbuilt firebase function.
   //It returns the authentication 'instance' that firebase uses.
   //We store this instance into the variable, 'auth'. 
@@ -114,49 +118,40 @@ export default function Attendance(props) {
 
   //This section handles the actual rendering for the Attendance component.
   return (
-    <div className = "attendance">
-      <h1>How many classes did you attend or miss today?</h1>
+    <div className="attendance">
+      <h1>Classes Attended Today</h1>
       <form onSubmit={handleSubmit}>
-      <div className = "LoginElements">
-      <label>Attended:
-        <input 
-          type="number"
-          value={attended} //Binds the input field's value to the attended useState variable.
-          onChange={(e) => setAttended(e.target.value)} 
-          //onChange event handler. 'e' is the event object being created because of this event handler.
-          //e.target refers to the specific DOM element that triggered this event. 
-          //In our case, it's the input field being changed.
-          //Finally e.target.value grabs the value of this input field, storing it via setAttended().
-
-        />
-      </label>
-      <label>Missed:
-        <input 
-          type="number" 
-          value={missed}
-          onChange={(e) => setMissed(e.target.value)}
-        />
-      </label>
-      <input type="submit" />
-      </div>
-    </form>
-    {score !== null && ( //Uses wack && operator where if score is not null, then it does the following
-    <h2>
-        {(() => {
-            if (score === -999) {
-                return `You can't have negative inputs.`;
-            } else if (score < 0) {
-                return `Lost points! ${score}`;
-            } else if (score > 0) {
-                return `Gained points! ${score}`;
-            } else {
-                return `Bruh nothing happened`;
-            }
-        })()}
-    </h2>
-    )}
-
+        <div className="LoginElements">
+          <label>Attended:
+            <input 
+              type="number"
+              value={attended}
+              onChange={(e) => setAttended(e.target.value)}
+            />
+            <div className="arrow-container">
+              <span className="arrow" onClick={incrementAttended}>▲</span>
+              <span className="arrow" onClick={decrementAttended}>▼</span>
+            </div>
+          </label>
+          <label>Missed:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input 
+              type="number" 
+              value={missed}
+              onChange={(e) => setMissed(e.target.value)}
+            />
+            <div className="arrow-container">
+              <span className="arrow" onClick={incrementMissed}>▲</span>
+              <span className="arrow" onClick={decrementMissed}>▼</span>
+            </div>
+          </label>
+          <input type="submit" />
+        </div>
+      </form>
+      {score !== null && (
+        <h2>
+          {score === -999 ? "You can't have negative inputs." : `Points: ${score}`}
+        </h2>
+      )}
     </div>
   );
-};
-
+}
