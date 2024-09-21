@@ -14,6 +14,11 @@ header {
     height: 60px; /* Ensure a consistent height */
   }
 
+header img {
+  height: 40px;
+  width: 40px;
+}
+
 .sign-out {
     background-color: rgba(255, 255, 255, 0.550);
     color: black;
@@ -55,3 +60,9 @@ background-color: rgba(255, 255, 255, 0.135);
     gap:50px;
     justify-content:center;
 align-items: center;}
+
+.headerDiv2 {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}

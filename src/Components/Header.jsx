@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { signOut } from "firebase/auth";
+import firePNG from "../assets/fire.png";
 
 //this will hold the title for each page
 function Header(props) {
@@ -36,7 +37,10 @@ function Header(props) {
 
   return (
     <header>
-      <h1>Jam Donuts</h1>
+      <div className="headerDiv2">
+      <img src={firePNG} alt=":fire emoji:"></img>
+      <h1>Classify</h1>
+      </div>
       <div className = "headerDiv">
       <p>Signed In as {props.email}</p>
       <button className="sign-out" onClick={userSignOut}>Sign Out</button>
