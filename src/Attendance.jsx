@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import Header from "./components/Header";
 import "./Attendance.css";
+import { db } from "./firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 
 export default function Attendance(props) {
@@ -8,7 +10,7 @@ export default function Attendance(props) {
   const [missed, setMissed] = useState("");
   const [score, setScore] = useState(null);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => { //What does async mean here?
     event.preventDefault();
     const attendedNum = parseInt(attended) || 0; //praseInt is needed here, even though the submit type="number", it's still saved as a string
     const missedNum = parseInt(missed) || 0;
@@ -19,11 +21,21 @@ export default function Attendance(props) {
     } else {
       const points = attendedNum - missedNum;
       setScore(points);
+
+      try {
+        const scoresCollection = collection(db, 'scores'); // Reference to 'scores' collection
+        await addDoc(scoresCollection, {
+            attended: attendedNum,
+            missed: missedNum,
+            score: points,
+            createdAt: Date.now() // Optional: to track when the score was created
+        });
+        console.log("Score saved successfully!");
+    } catch (error) {
+        console.error("Error saving score: ", error);
     }
 
-    //After this, also use the score state and store that shit in the database somehow, so far I've just done the UI/user-side feedback part.
-    
-  
+    }
   };
 
 
