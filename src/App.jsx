@@ -15,6 +15,7 @@ import {  signOut } from "firebase/auth";
 
 function App() {
   const [authUser, setAuthUser] = useState(null);
+  const [loading, setLoading] = useState(true);  // New loading state
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
@@ -23,6 +24,8 @@ function App() {
       } else {
         setAuthUser(null);
       }
+      setLoading(false);  // Stop loading after auth check
+
     });
     return () => {
       listen();
@@ -38,22 +41,23 @@ function App() {
         console.log(error);
       });
   };
-
+  
   return (
     <>
-      {authUser ? (
-        <>
-        <Header email={authUser.email}/>
-        <div className = "outerContainer">
-
-        <Leaderboard/>
-        <Attendance/>
-        <Streaks/>
-        </div>
-        </>
-      ) : (
-        <AuthDetails />
-      )}
+      <Header email={authUser?.email} />
+      <div className="outerContainer">
+        {loading ? (
+          <div className = "loading"><h1>Loading...</h1></div> 
+        ) : authUser ? (
+          <>
+            <Leaderboard />
+            <Attendance />
+            <Streaks />
+          </>
+        ) : (
+          <AuthDetails />
+        )}
+      </div>
     </>
   );
 }
