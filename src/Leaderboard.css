@@ -56,3 +56,9 @@
 .leaderboard table tr.bronze:hover {
   background-color: #c1782f; /* bronze color */
 }
+.leaderboard h1{
+  margin-bottom: 20px;
+}
+.streaks h1{
+  margin-bottom: 10px;
+}

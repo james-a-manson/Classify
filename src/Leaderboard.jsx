@@ -38,6 +38,7 @@ const Leaderboard = () => {
 
   return (
     <div className="leaderboard">
+      <h1>Leaderboard</h1>
       <table cellPadding="10">
         <thead>
           <tr>
