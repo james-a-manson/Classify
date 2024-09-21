@@ -14,7 +14,7 @@ export default function Attendance(props) {
     const missedNum = parseInt(missed) || 0;
     
     //Bit of validation checking for negative values
-    if (attendedNum < 0 || missed < 0) {
+    if (attendedNum < 0 || missedNum < 0) {
       setScore(-999);
     } else {
       const points = attendedNum - missedNum;
@@ -22,6 +22,8 @@ export default function Attendance(props) {
     }
 
     //After this, also use the score state and store that shit in the database somehow, so far I've just done the UI/user-side feedback part.
+    
+  
   };
 
 
