@@ -42,7 +42,7 @@ const Leaderboard = () => {
       <table cellPadding="10">
         <thead>
           <tr>
-            <th>Name</th>
+            <th>Email</th>
             <th>Score</th>
             <th>Streak</th>
           </tr>
