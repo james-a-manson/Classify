@@ -43,9 +43,7 @@ function App() {
     <>
       {authUser ? (
         <>
-        <p>Signed In as {authUser.email}</p>
-        <button onClick={userSignOut}>Sign Out</button>
-        <Header />
+        <Header email={authUser.email}/>
         <div className = "outerContainer">
 
         <Leaderboard/>
