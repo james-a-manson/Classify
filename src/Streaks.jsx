@@ -5,24 +5,34 @@ import firePNG from "./assets/fire.png";
 import cryingPNG from "./assets/crying.png";
 
 import { db } from "./firebase";
-import { collection, addDoc, updateDoc, doc, getDocs, query, where } from "firebase/firestore";
-import {getAuth} from "firebase/auth";
+import {
+  collection,
+  addDoc,
+  updateDoc,
+  doc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 export default function Streaks() {
-
   const [streak, setStreak] = useState(null);
 
   const auth = getAuth();
   const userEmail = auth.currentUser ? auth.currentUser.email : null;
 
   useEffect(() => {
-    const fetchUserDocument = async () => { 
+    const fetchUserDocument = async () => {
       if (!userEmail) {
         return;
       }
 
-      const studentsCollection = collection(db, 'students');
-      const q = query(studentsCollection, where("student_email", "==", userEmail));
+      const studentsCollection = collection(db, "students");
+      const q = query(
+        studentsCollection,
+        where("student_email", "==", userEmail)
+      );
       const querySnapshot = await getDocs(q);
 
       if (!querySnapshot.empty) {
@@ -36,11 +46,10 @@ export default function Streaks() {
 
   //rendering section
   return (
-    <div className = "streaks">
+    <div className="streaks">
       <h1>Streak Count</h1>
-      <h1 id="Number">{streak !== null ? streak : "Loading..."}</h1>
+      <h1 id="Number">{streak !== null ? streak : "No streak found..."}</h1>
       <img src={streak > 0 ? firePNG : cryingPNG} alt=":emoji:"></img>
     </div>
   );
 }
-
