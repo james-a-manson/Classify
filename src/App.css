@@ -15,8 +15,8 @@ header {
   }
 
 .sign-out {
-    background-color: #ff4757;
-    color: white;
+    background-color: rgba(255, 255, 255, 0.550);
+    color: black;
     border: none;
     border-radius: 5px;
     padding: 8px 12px;
@@ -25,7 +25,7 @@ header {
   }
 
 .sign-out:hover {
-    background-color: #e84118;
+    background-color: rgba(255, 255, 255, 0.750);
   }
 
 .outerContainer{
