@@ -3,7 +3,7 @@ import { auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import reactLogo from "./assets/react.svg"; //delete these two later, not needed anymore
 import viteLogo from "/vite.svg"; //also delete the logo files themselves
-import Header from "./components/Header";
+import Header from "./Components/Header";
 import Leaderboard from "./Leaderboard";
 import Login from "./LoginForm";
 import Streaks from "./Streaks";
@@ -46,6 +46,12 @@ function App() {
         <p>Signed In as {authUser.email}</p>
         <button onClick={userSignOut}>Sign Out</button>
         <Attendance />
+        <Header />
+        <div className = "outerContainer">
+        <Leaderboard/>
+        <Attendance/>
+        <Streaks/>
+        </div>
         </>
       ) : (
         <AuthDetails />
