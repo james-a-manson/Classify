@@ -42,7 +42,7 @@ function Header(props) {
       <h1>Classify</h1>
       </div>
       <div className = "headerDiv">
-      <p>Signed In as {props.email}</p>
+      <p>Signed in as: <strong >{props.email}</strong></p>
       <button className="sign-out" onClick={userSignOut}>Sign Out</button>
       </div>
     </header>
