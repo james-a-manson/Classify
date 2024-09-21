@@ -14,7 +14,17 @@ const SignUp = ({ toggleAuthMode }) => {
     .then((userCredential) => {
         console.log(userCredential);
     }).catch((error) => {
-        setError(error.message);
+        switch (error.message) {
+            case 'Firebase: Error (auth/email-already-in-use).':
+                setError('Email already in use');
+                break;
+            case 'Firebase: Password should be at least 6 characters (auth/weak-password).':
+                setError('Password is too weak');
+                break;
+            default:
+                setError(error.message);
+                break;
+        }
         console.log(error);
     });
   }

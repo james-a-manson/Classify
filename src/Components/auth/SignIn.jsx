@@ -15,7 +15,17 @@ const SignIn = ({ toggleAuthMode }) => {
         console.log(userCredential);
       })
       .catch((error) => {
-        setError(error.message);
+        switch (error.message) {
+            case 'Firebase: Error (auth/invalid-credential).':
+                setError('Incorrect email or password');
+                break;
+            case 'Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).':
+                setError('Too many attempts, try again later');
+                break;
+            default:
+                setError(error.message);
+                break;
+        }
         console.log(error);
       });
   };
