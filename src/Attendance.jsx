@@ -166,6 +166,7 @@ export default function Attendance() {
             </div>
           </label>
           <input type="submit" />
+          
         </div>
       </form>
       {score !== null && (
