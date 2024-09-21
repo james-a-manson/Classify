@@ -3,6 +3,14 @@ import Header from "./components/Header";
 import "./Streaks.css";
 import firePNG from "./assets/fire.png";
 
+import { db } from "./firebase";
+import { query, getDoc, collection, where } from "firebase/firestore";
+import { auth } from "./firebase";
+
+const currentUser = auth.currentUser;
+const colRef = collection(db, 'students');
+const q = query(colRef, where('student_email', '==', currentUser));
+
 
 export default function Streaks(props) {
   return (
