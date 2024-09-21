@@ -38,13 +38,6 @@ const AuthDetails = () => {
 
   return (
     <>
-      
-      {authUser ? (
-        <>
-          <p>Signed In as {authUser.email}</p>
-          <button onClick={userSignOut}>Sign Out</button>
-        </>
-      ) : (
         <>
           {isRegister ? (
             <SignUp toggleAuthMode={toggleAuthMode} />
@@ -52,7 +45,6 @@ const AuthDetails = () => {
             <SignIn toggleAuthMode={toggleAuthMode} />
           )}
         </>
-      )}
     </>
   );
 };

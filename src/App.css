@@ -32,10 +32,26 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    gap:50px;
+    gap:10px;
+    background-image: url("./assets/backgroundblurred.png");
+    background-size: cover;
+    background-position:center;
+    background-repeat: no-repeat;
+    height: 100vh;
 }
 .attendance, .leaderboard, .streaks{
     padding: 20px;
-  border-style: dashed
+  /* border-style: dashed; */
+  margin:20px;
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds shadow for depth */
+flex:1;
+background-color: rgba(255, 255, 255, 0.135);
 
 }
+.headerDiv{
+    display: flex;
+    flex-direction: row;
+    gap:50px;
+    justify-content:center;
+align-items: center;}
