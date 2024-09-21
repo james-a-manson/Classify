@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "./Components/Header";
 import "./Streaks.css";
 import firePNG from "./assets/fire.png";
+import cryingPNG from "./assets/crying.png";
 
 import { db } from "./firebase";
 import { collection, addDoc, updateDoc, doc, getDocs, query, where } from "firebase/firestore";
@@ -38,7 +39,7 @@ export default function Streaks() {
     <div className = "streaks">
       <h1 id="Phrase">Your streak count:</h1>
       <h1 id="Number">{streak !== null ? streak : "Loading..."}</h1>
-      <img src={firePNG} alt=":fire emoji:"></img>
+      <img src={streak > 0 ? firePNG : cryingPNG} alt=":emoji:"></img>
     </div>
   );
 }
