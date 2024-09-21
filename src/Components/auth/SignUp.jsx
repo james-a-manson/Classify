@@ -6,6 +6,7 @@ import background from "../../assets/background.png";
 const SignUp = ({ toggleAuthMode }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const signUp = (e) => {
     e.preventDefault();
@@ -13,6 +14,7 @@ const SignUp = ({ toggleAuthMode }) => {
     .then((userCredential) => {
         console.log(userCredential);
     }).catch((error) => {
+        setError(error.message);
         console.log(error);
     });
   }
@@ -31,6 +33,7 @@ const SignUp = ({ toggleAuthMode }) => {
      <div className = "LoginElements">
 
         <h1>Create Account</h1>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <input
           type="email"
           placeholder="Enter your email"
