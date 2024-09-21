@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import Header from "./components/Header";
+import Header from "./Components/Header";
 import "./Attendance.css";
 import { db } from "./firebase";
 import { collection, addDoc, updateDoc, doc, getDocs, query, where } from "firebase/firestore";

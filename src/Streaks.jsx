@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Header from "./components/Header";
+import Header from "./Components/Header";
 import "./Streaks.css";
 import firePNG from "./assets/fire.png";
 

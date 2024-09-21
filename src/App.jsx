@@ -45,7 +45,6 @@ function App() {
         <>
         <p>Signed In as {authUser.email}</p>
         <button onClick={userSignOut}>Sign Out</button>
-        <Attendance />
         <Header />
         <div className = "outerContainer">
         <Leaderboard/>
